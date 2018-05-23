@@ -11,7 +11,7 @@
  * @license		https://mvccore.github.io/docs/mvccore/5.0.0/LICENCE.md
  */
 
-namespace MvcCore\Ext\View\Helpers;
+namespace MvcCore\Ext\Views\Helpers;
 
 /**
  * Responsibility - format money by `Intl` extension or by locale formating conventions or by explicit or default arguments.
@@ -31,7 +31,7 @@ namespace MvcCore\Ext\View\Helpers;
  * @see http://php.net/manual/en/function.number-format.php
  * @see http://php.net/manual/en/function.localeconv.php
  */
-class FormatMoney extends \MvcCore\Ext\View\Helpers\FormatNumber
+class FormatMoney extends \MvcCore\Ext\Views\Helpers\FormatNumber
 {
 	/**
 	 * MvcCore Extension - View Helper - Assets - version:
@@ -45,7 +45,7 @@ class FormatMoney extends \MvcCore\Ext\View\Helpers\FormatNumber
 	 * to configure as singleton before it's used for first time.
 	 * Example:
 	 *	`\MvcCore\Ext\View\Helpers\FormatMoney::GetInstance()`
-	 * @var \MvcCore\Ext\View\Helpers\FormatMoney
+	 * @var \MvcCore\Ext\Views\Helpers\FormatMoney
 	 */
 	protected static $instance;
 
@@ -71,7 +71,7 @@ class FormatMoney extends \MvcCore\Ext\View\Helpers\FormatNumber
 	 * This property setter is used only for `Intl` extension formating,
 	 * not for fallback by `\number_format()` and `\localeconv()`.
 	 * @param string $defaultCurrency
-	 * @return \MvcCore\Ext\View\Helpers\FormatMoney
+	 * @return \MvcCore\Ext\Views\Helpers\FormatMoney
 	 */
 	public function & SetDefaultCurrency ($defaultCurrency) {
 		$this->defaultCurrency = $defaultCurrency;
