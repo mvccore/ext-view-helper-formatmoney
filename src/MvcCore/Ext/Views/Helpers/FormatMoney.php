@@ -63,7 +63,7 @@ class FormatMoney extends \MvcCore\Ext\Views\Helpers\FormatNumber
 	 * This property is used only for fallback if formating is not by `Intl` extension.
 	 * @var \int[]
 	 */
-	protected $localeCategories = array(LC_NUMERIC, LC_MONETARY);
+	protected $localeCategories = [LC_NUMERIC, LC_MONETARY];
 
 	/**
 	 * Set default currency to not define third param every time in `FormatMoney()` function.
@@ -131,8 +131,8 @@ class FormatMoney extends \MvcCore\Ext\Views\Helpers\FormatNumber
 			\NumberFormatter::CURRENCY,
 			NULL,
 			($decimalsCount !== NULL
-				? array(\NumberFormatter::FRACTION_DIGITS => $decimalsCount)
-				: array())
+				? [\NumberFormatter::FRACTION_DIGITS => $decimalsCount]
+				: [])
 		);
 		if ($currency === NULL) {
 			if ($this->defaultCurrency !== NULL) {
