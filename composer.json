@@ -1,7 +1,7 @@
 {
 	"name": "mvccore/ext-view-helper-formatmoney",
 	"type": "library",
-	"description": "MvcCore Extension - View Helper - FormatMoney - format money by `Intl` extension or by locale formating conventions or by explicit or default arguments.",
+	"description": "MvcCore - Extension - View - Helper - FormatMoney - format money by `Intl` extension or by locale formating conventions or by explicit or default arguments.",
 	"keywords": [
 		"mvc", 
 		"mvccore", 
