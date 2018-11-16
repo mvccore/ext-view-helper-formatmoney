@@ -14,14 +14,14 @@
 namespace MvcCore\Ext\Views\Helpers;
 
 /**
- * Responsibility - format money by `Intl` extension or by locale formating conventions or by explicit or default arguments.
- * - Formating processed by `Intl` extension if installed or by `\number_format()` and `\localeconv()` fallback.
+ * Responsibility - format money by `Intl` extension or by locale formatting conventions or by explicit or default arguments.
+ * - Formatting processed by `Intl` extension if installed or by `\number_format()` and `\localeconv()` fallback.
  * - Possiblity to define default decimal points value to not define it every time using `FormatMoney()` call.
  * - Possiblity to define default currency value to not define it every time using `FormatMoney()` call.
- * - Possiblity to define argument to create `Intl` money formater instance in every call or globaly by default setters in parent class.
- * - Possiblity to define any argument for `number_format()` and `\localeconv()` fallback in every call or globaly by default setters in parent class.
- * - If there is used formating fallback and no locale formating conventions are defined, system locale settings is automaticly
- *   configured by request language and request locale and by system locale settings are defined locale formating conventions.
+ * - Possiblity to define argument to create `Intl` money formatter instance in every call or globally by default setters in parent class.
+ * - Possiblity to define any argument for `number_format()` and `\localeconv()` fallback in every call or globally by default setters in parent class.
+ * - If there is used formatting fallback and no locale formatting conventions are defined, system locale settings is automatically
+ *   configured by request language and request locale and by system locale settings are defined locale formatting conventions.
  * - Fallback result string always returned in response encoding, in UTF-8 by default.
  *
  * @see http://php.net/manual/en/numberformatter.create.php
@@ -35,7 +35,7 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 {
 	/**
 	 * MvcCore Extension - View Helper - Assets - version:
-	 * Comparation by PHP function version_compare();
+	 * Comparison by PHP function version_compare();
 	 * @see http://php.net/manual/en/function.version-compare.php
 	 */
 	const VERSION = '5.0.0-alpha';
@@ -52,15 +52,15 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 	/**
 	 * Default currency to not define third param every time in `FormatMoney()` function.
 	 * The 3-letter ISO 4217 currency code indicating the currency to use.
-	 * This property is used only for `Intl` extension formating,
+	 * This property is used only for `Intl` extension formatting,
   * not for fallback by `\number_format()` and `\localeconv()`.
 	 * @var string|NULL
 	 */
 	protected $defaultCurrency = NULL;
 
 	/**
-	 * System `setlocale()` category to set up system locale automaticly in `parent::SetView()` method.
-	 * This property is used only for fallback if formating is not by `Intl` extension.
+	 * System `setlocale()` category to set up system locale automatically in `parent::SetView()` method.
+	 * This property is used only for fallback if formatting is not by `Intl` extension.
 	 * @var \int[]
 	 */
 	protected $localeCategories = [LC_NUMERIC, LC_MONETARY];
@@ -68,7 +68,7 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 	/**
 	 * Set default currency to not define third param every time in `FormatMoney()` function.
 	 * The 3-letter ISO 4217 currency code indicating the currency to use.
-	 * This property setter is used only for `Intl` extension formating,
+	 * This property setter is used only for `Intl` extension formatting,
 	 * not for fallback by `\number_format()` and `\localeconv()`.
 	 * @param string $defaultCurrency
 	 * @return \MvcCore\Ext\Views\Helpers\FormatMoneyHelper
@@ -87,11 +87,11 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 	 * @see http://php.net/manual/en/function.localeconv.php
 	 * @param int|float|string	$number			The number being formatted.
 	 * @param int|NULL			$decimalsCount	Optional, numerics count after decimal point.
-	 *											If `NULL`, there is used `Intl` localized formater
+	 *											If `NULL`, there is used `Intl` localized formatter
 	 *											default value for money, usually two - `2`.
 	 *											If `NULL` for fallback `number_format()`, there is used
 	 *											system locale settings and if there are used default
-	  *											locale conventions for formating - usually for `en_US` two - `2`
+	  *											locale conventions for formatting - usually for `en_US` two - `2`
 	 * @param string|NULL		$currency		Optional, 3-letter ISO 4217 currency code indicating the currency to use.
 	 * @return string
 	 */
@@ -101,8 +101,8 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 		$valueToFormat = $numberIsNumeric && is_string($number)
 			? floatval($number)
 			: $number;
-		if ($this->intlExtensionFormating) {
-			return $this->formatByIntlMoneyFormater(
+		if ($this->intlExtensionFormatting) {
+			return $this->formatByIntlMoneyFormatter(
 				$valueToFormat, $decimalsCount, $currency
 			);
 		} else {
@@ -113,20 +113,20 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 	}
 
 	/**
-	 * Format money by `Intl` extension formater. If no international three chars currency
-	 * symbol is provided, there is used currency symbol from localized `Intl` formater instance.
+	 * Format money by `Intl` extension formatter. If no international three chars currency
+	 * symbol is provided, there is used currency symbol from localized `Intl` formatter instance.
 	 * @see http://php.net/manual/en/numberformatter.create.php
 	 * @see http://php.net/manual/en/numberformatter.formatcurrency.php
 	 * @param int|float		$valueToFormat	Numeric value to format.
 	 * @param int|NULL		$decimalsCount	Optional, numerics count after decimal point,
-	 *										If `NULL`, there is used `Intl` localized formater
+	 *										If `NULL`, there is used `Intl` localized formatter
 	 *										default value for money, usually two - `2`.
 	 * @param string|NULL	$currency		Optional, 3-letter ISO 4217 currency code
 	 *										indicating the currency to use.
 	 * @return string
 	 */
-	protected function formatByIntlMoneyFormater ($valueToFormat = 0.0, $decimalsCount = NULL, $currency = NULL) {
-		$formater = $this->getIntlNumberFormater(
+	protected function formatByIntlMoneyFormatter ($valueToFormat = 0.0, $decimalsCount = NULL, $currency = NULL) {
+		$formatter = $this->getIntlNumberFormatter(
 			$this->langAndLocale,
 			\NumberFormatter::CURRENCY,
 			NULL,
@@ -139,10 +139,10 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 				// try to get default currency
 				$currency = $this->defaultCurrency;
 			} else {
-				// try to get currency from localized formater
-				$currency = \numfmt_get_symbol($formater, \NumberFormatter::INTL_CURRENCY_SYMBOL);
+				// try to get currency from localized formatter
+				$currency = \numfmt_get_symbol($formatter, \NumberFormatter::INTL_CURRENCY_SYMBOL);
 				if (mb_strlen($currency) !== 3) {
-					// try to get currency by system locale settings, by formating conventions
+					// try to get currency by system locale settings, by formatting conventions
 					if ($this->encodingConversion === NULL) {
 						$this->setUpSystemLocaleAndEncodings();
 						$this->setUpLocaleConventions();
@@ -151,20 +151,20 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 				}
 			}
 		}
-		return \numfmt_format_currency($formater, $valueToFormat, $currency);
+		return \numfmt_format_currency($formatter, $valueToFormat, $currency);
 	}
 
 	/**
-	 * Fallback formating by PHP `\number_format()` and by system locale formating conventions.
-	 * If there was not possible to define system locale formating conventions, there are used
-	 * default formating conventions, usually for `en_US`.
+	 * Fallback formatting by PHP `\number_format()` and by system locale formatting conventions.
+	 * If there was not possible to define system locale formatting conventions, there are used
+	 * default formatting conventions, usually for `en_US`.
 	 * @see http://php.net/manual/en/function.localeconv.php
 	 * @see http://php.net/manual/en/function.number-format.php
 	 * @param int|float	$valueToFormat	The number being formatted.
 	 * @param int|NULL	$decimalsCount	Optional, numerics count after decimal point for `number_format()`,
 	 *									If `NULL`, there is used system locale settings and if there are
 	 *									no locale system settings, there are used default locale conventions
-	 *									for formating - usually for `en_US` two - `2`.
+	 *									for formatting - usually for `en_US` two - `2`.
 	 * @return string
 	 */
 	protected function fallbackFormatByLocaleConventions ($valueToFormat = 0.0, $decimalsCount = NULL) {
@@ -184,7 +184,7 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 			abs($valueToFormat), $decimalsCount,
 			$lc->mon_decimal_point, $lc->mon_thousands_sep
 		);
-		// if formated number is under zero - formating rules will be different
+		// if formated number is under zero - formatting rules will be different
 		if ($negative) {
 			$signSymbol  = $lc->negative_sign;
 			$signPosition    = $lc->n_sign_posn;
