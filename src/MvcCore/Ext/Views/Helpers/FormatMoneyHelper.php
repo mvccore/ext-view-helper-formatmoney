@@ -16,10 +16,10 @@ namespace MvcCore\Ext\Views\Helpers;
 /**
  * Responsibility - format money by `Intl` extension or by locale formatting conventions or by explicit or default arguments.
  * - Formatting processed by `Intl` extension if installed or by `\number_format()` and `\localeconv()` fallback.
- * - Possiblity to define default decimal points value to not define it every time using `FormatMoney()` call.
- * - Possiblity to define default currency value to not define it every time using `FormatMoney()` call.
- * - Possiblity to define argument to create `Intl` money formatter instance in every call or globally by default setters in parent class.
- * - Possiblity to define any argument for `number_format()` and `\localeconv()` fallback in every call or globally by default setters in parent class.
+ * - Possibility to define default decimal points value to not define it every time using `FormatMoney()` call.
+ * - Possibility to define default currency value to not define it every time using `FormatMoney()` call.
+ * - Possibility to define argument to create `Intl` money formatter instance in every call or globally by default setters in parent class.
+ * - Possibility to define any argument for `number_format()` and `\localeconv()` fallback in every call or globally by default setters in parent class.
  * - If there is used formatting fallback and no locale formatting conventions are defined, system locale settings is automatically
  *   configured by request language and request locale and by system locale settings are defined locale formatting conventions.
  * - Fallback result string always returned in response encoding, in UTF-8 by default.
@@ -173,7 +173,7 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 			$this->setUpLocaleConventions();
 		}
 		$lc = & $this->localeConventions;
-		// decide number to format is possitive or negative
+		// decide number to format is positive or negative
 		$negative = $valueToFormat < 0;
 		// complete decimals count by given argument or by default fractal digits property
 		$decimalsCount = $decimalsCount !== NULL
@@ -184,7 +184,7 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 			abs($valueToFormat), $decimalsCount,
 			$lc->mon_decimal_point, $lc->mon_thousands_sep
 		);
-		// if formated number is under zero - formatting rules will be different
+		// if formatted number is under zero - formatting rules will be different
 		if ($negative) {
 			$signSymbol  = $lc->negative_sign;
 			$signPosition    = $lc->n_sign_posn;
@@ -200,7 +200,7 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 		$currency = $lc->currency_symbol;
 		// decide if currency symbol precedes a negative value or not
 		if ($currencyBeforeValue) {
-			// if currency symbol is before formated number
+			// if currency symbol is before formatted number
 			if ($signPosition == 3) {
 				// sign symbol is before currency symbol
 				$currency = $signSymbol . $currency;
@@ -208,14 +208,14 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 				// sign symbol is after currency symbol
 				$currency .= $signSymbol;
 			}
-			// currency symbol is before formated number, sometimes separated by space or not
+			// currency symbol is before formatted number, sometimes separated by space or not
 			if ($currencySeparatedBySpace) {
 				$result = $currency . ' ' . $result;
 			} else {
 				$result = $currency . $result;
 			}
 		} else {
-			// if currency symbol is after formated number, sometimes separated by space or not
+			// if currency symbol is after formatted number, sometimes separated by space or not
 			if ($currencySeparatedBySpace) {
 				$result .= ' '.$currency;
 			} else {
