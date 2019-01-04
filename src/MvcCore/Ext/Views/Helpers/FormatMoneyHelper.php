@@ -30,6 +30,7 @@ namespace MvcCore\Ext\Views\Helpers;
  * @see http://php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformatattribute
  * @see http://php.net/manual/en/function.number-format.php
  * @see http://php.net/manual/en/function.localeconv.php
+ * @method \MvcCore\Ext\Views\Helpers\FormatMoneyHelper GetInstance()
  */
 class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 {
