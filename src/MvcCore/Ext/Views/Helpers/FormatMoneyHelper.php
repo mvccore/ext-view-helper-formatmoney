@@ -74,7 +74,7 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 	 * @param string $defaultCurrency
 	 * @return \MvcCore\Ext\Views\Helpers\FormatMoneyHelper
 	 */
-	public function & SetDefaultCurrency ($defaultCurrency) {
+	public function SetDefaultCurrency ($defaultCurrency) {
 		$this->defaultCurrency = $defaultCurrency;
 		return $this;
 	}
@@ -173,7 +173,7 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper
 			$this->setUpSystemLocaleAndEncodings();
 			$this->setUpLocaleConventions();
 		}
-		$lc = & $this->localeConventions;
+		$lc = $this->localeConventions;
 		// decide number to format is positive or negative
 		$negative = $valueToFormat < 0;
 		// complete decimals count by given argument or by default fractal digits property
