@@ -3,23 +3,23 @@
 	"type": "library",
 	"description": "MvcCore - Extension - View - Helper - FormatMoney - format money by `Intl` extension or by locale formating conventions or by explicit or default arguments.",
 	"keywords": [
-		"mvc", 
-		"mvccore", 
-		"framework", 
-		"extension", 
-		"plugin", 
-		"plug-in", 
-		"ext", 
-		"view", 
-		"helper", 
-		"viewhelper", 
-		"format", 
-		"number", 
-		"integer", 
-		"float", 
-		"money", 
-		"intl", 
-		"locale", 
+		"mvc",
+		"mvccore",
+		"framework",
+		"extension",
+		"plugin",
+		"plug-in",
+		"ext",
+		"view",
+		"helper",
+		"viewhelper",
+		"format",
+		"number",
+		"integer",
+		"float",
+		"money",
+		"intl",
+		"locale",
 		"conventions"
 	],
 	"license": ["BSD-3-Clause"],
@@ -29,10 +29,12 @@
 	}],
 	"require": {
 		"php": ">=5.4.0",
-		"mvccore/ext-view-helper-formatnumber": "dev-master"
+		"mvccore/ext-view-helper-formatnumber": "^5.0"
 	},
 	"autoload": {
-		"classmap": ["src/"]
+		"classmap": [
+			"src/"
+		]
 	},
 	"minimum-stability": "dev"
 }
