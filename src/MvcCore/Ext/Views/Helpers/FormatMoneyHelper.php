@@ -39,7 +39,7 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper {
 	 * Comparison by PHP function version_compare();
 	 * @see http://php.net/manual/en/function.version-compare.php
 	 */
-	const VERSION = '5.0.0';
+	const VERSION = '5.0.1';
 
 	/**
 	 * If this static property is set - helper is possible
@@ -127,13 +127,16 @@ class FormatMoneyHelper extends \MvcCore\Ext\Views\Helpers\FormatNumberHelper {
 	 * @return string
 	 */
 	protected function formatByIntlMoneyFormatter ($valueToFormat = 0.0, $decimalsCount = NULL, $currency = NULL) {
+		$attributes = [];
+		foreach ($this->intlDefaultAttributes as $key => $value)
+			$attributes[$key] = $value;
+		if ($decimalsCount !== NULL)
+			$attributes[\NumberFormatter::FRACTION_DIGITS] = $decimalsCount;
 		$formatter = $this->getIntlNumberFormatter(
 			$this->langAndLocale,
 			\NumberFormatter::CURRENCY,
 			NULL,
-			($decimalsCount !== NULL
-				? [\NumberFormatter::FRACTION_DIGITS => $decimalsCount]
-				: [])
+			$attributes
 		);
 		if ($currency === NULL) {
 			if ($this->defaultCurrency !== NULL) {
