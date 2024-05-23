@@ -29,7 +29,7 @@
 	}],
 	"require": {
 		"php": ">=5.4.0",
-		"mvccore/ext-view-helper-formatnumber": "^5.0"
+		"mvccore/ext-view-helper-formatnumber": "^5.2"
 	},
 	"autoload": {
 		"classmap": [
